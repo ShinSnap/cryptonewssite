@@ -1,1 +1,18 @@
-<h1>Hello World!</h1>
+
+<div class="container">
+  <div class="row">
+    <% for items in @news['Data'] %>
+      <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="<%= items['imageurl'] %>" alt="<%= items['source'] %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= items['title']%></h5>
+            <p class="card-text"><%= items['body'] %></p>
+            <a href="<%= items['url'] %>" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      <br/>
+      </div>
+    <% end %>
+  </div>
+</div>
