@@ -1,1 +1,23 @@
-<h1>Prices Page!<h1>
+<% if @symbol_price %>
+  <% if @symbol_price['Response'] %>
+    <h1><%= @symbol %> doesn't exist.</h1>
+    <h2>Please enter a valid Crypto Symbol in the search bar above.</h2>
+  <% else %>
+    <% @symbol_price['DISPLAY'].each do |key, value| %>
+      <div class="jumbotron">
+        <h1 class="display-4"><%= key %></h1>
+        <hr class="my-4">
+          <%= value['USD']['PRICE'] %><br/>
+          <%= value['USD']['HIGHDAY'] %><br/>
+          <%= value['USD']['LOWDAY'] %><br/>
+          <%= value['USD']['MKTCAP'] %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <h1>Please enter a symbol in the search bar above.</h1><br/>
+  <%= form_tag home_prices_path, :method => 'POST', class: "form-control form-control-lg" do %>
+  <%= text_field_tag 'sym', nil, placeholder: 'Enter Crypto Symbol', class: 'form-control' %><br/>
+  <p align="center"><%= submit_tag 'Lookup', class: 'btn btn-outline-secondary my-2 my-sm-0' %></p>
+  <% end %>
+<% end %>
